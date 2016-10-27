@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:jee="http://www.springframework.org/schema/jee"
+       xmlns:lang="http://www.springframework.org/schema/lang"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-4.3.xsd
+		http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang-4.3.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd">
+
+    <context:property-placeholder location="classpath:application.properties" file-encoding="UTF-8" />
+    <!-- 包扫描 -->
+    <context:component-scan base-package="com.docworks.webtop.web.controller" />
+
+    <!-- 开启Spring MVC注解驱动，完成DefaultAnnotationHandlerMapping和AnnotationMethodHandlerAdapter的注册 -->
+    <mvc:annotation-driven validator="localValidatorFactoryBean">
+        <mvc:message-converters>
+            <ref bean="mappingJackson2HttpMessageConverter" />
+        </mvc:message-converters>
+
+        <mvc:argument-resolvers>
+            <ref bean="dfSessionMethodArgumentResolver" />
+        </mvc:argument-resolvers>
+    </mvc:annotation-driven>
+
+    <!-- Jackson消息转换器 -->
+    <bean id="mappingJackson2HttpMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+        <property name="supportedMediaTypes">
+            <list>
+                <value>text/plain;charset=UTF-8</value>
+                <value>application/json;charset=UTF-8</value>
+            </list>
+        </property>
+        <property name="defaultCharset" value="UTF-8" />
+        <property name="prettyPrint" value="true" />
+    </bean>
+
+    <!-- 自定义注解，完成Controller方法参数IDfSession对象的注入 -->
+    <bean id="dfSessionMethodArgumentResolver" class="com.docworks.webtop.web.method.resolver.DfSessionMethodArgumentResolver">
+        <property name="tokenParamName" value="${webtop.env.defaultTokenParamName}" />
+    </bean>
+
+    <!-- 使用Hibernate Validator提供的Bean校验器 -->
+    <bean id="localValidatorFactoryBean" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+        <property name="providerClass" value="org.hibernate.validator.HibernateValidator" />
+        <property name="validationMessageSource" ref="messageSource" />
+    </bean>
+
+    <!-- Message Source -->
+    <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <property name="basenames">
+            <list>
+                <value>classpath:messages</value>
+                <value>classpath:ValidationMessages</value>
+            </list>
+        </property>
+        <property name="fallbackToSystemLocale" value="true" />
+        <property name="defaultEncoding" value="UTF-8" />
+        <property name="cacheMillis" value="1800000" />
+    </bean>
+
+    <!-- 本地化解析器 -->
+    <bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
+        <property name="defaultLocale" value="${webtop.env.defaultLocale}" />
+    </bean>
+
+    <!-- 拦截器配置 -->
+    <mvc:interceptors>
+        <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+            <property name="paramName" value="${webtop.env.localeParamName}" />
+        </bean>
+    </mvc:interceptors>
+
+    <!-- 静态资源处理（对静态资源请求放行） -->
+    <mvc:default-servlet-handler default-servlet-name="default" />
+</beans>

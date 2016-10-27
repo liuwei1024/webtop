@@ -1,0 +1,231 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>org.matrixstudio</groupId>
+	<artifactId>webtop</artifactId>
+	<version>1.0.0</version>
+	<packaging>war</packaging>
+
+	<name>Webtop</name>
+	<url>http://maven.apache.org</url>
+
+	<properties>
+		<!-- 项目源代码编码格式 -->
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+		<!-- 编译JDK版本 -->
+		<project.build.jdk.version>1.8</project.build.jdk.version>
+		
+		<org.springframework.version>4.3.3.RELEASE</org.springframework.version>
+		<!--<org.springframework.data.jpa.version>1.10.4.RELEASE</org.springframework.data.jpa.version>-->
+		<!--<org.apache.tomcat.jdbc.version>8.5.6</org.apache.tomcat.jdbc.version>-->
+		<!--<mysql.connector.java.version>6.0.4</mysql.connector.java.version>-->
+		<org.aspectj.aspectjweaver.version>1.8.9</org.aspectj.aspectjweaver.version>
+		<org.apache.commons.collections.version>3.2.2</org.apache.commons.collections.version>
+		<org.apache.log4j.version>1.2.17</org.apache.log4j.version>
+		<org.slf4j.log4j12.version>1.7.21</org.slf4j.log4j12.version>
+		<com.fasterxml.jackson.core.jackson.databind.version>2.8.4</com.fasterxml.jackson.core.jackson.databind.version>
+		<org.hibernate.validator.version>5.3.0.Final</org.hibernate.validator.version>
+		<!--<org.hibernate.entitymanager.version>5.2.3.Final</org.hibernate.entitymanager.version>-->
+		<org.glassfish.web.javax.el.version>2.2.6</org.glassfish.web.javax.el.version>
+		<javax.servlet.api.version>3.1.0</javax.servlet.api.version>
+		<org.testng.version>6.9.13.6</org.testng.version>
+		<!--<com.h2database.h2.version>1.4.192</com.h2database.h2.version>-->
+		<com.docworks.dctm.version>1.0.0</com.docworks.dctm.version>
+		
+		<org.apache.maven.compiler.plugin.version>3.5.1</org.apache.maven.compiler.plugin.version>
+        <org.eclipse.jetty.maven.plugin.version>9.3.13.v20161014</org.eclipse.jetty.maven.plugin.version>
+	</properties>
+
+	<dependencies>
+		<!-- Springframework -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>${org.springframework.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>${org.springframework.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${org.springframework.version}</version>
+		</dependency>
+		
+		<!-- Spring data
+		<dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-jpa</artifactId>
+            <version>${org.springframework.data.jpa.version}</version>
+        </dependency>
+        -->
+	
+		<!-- Tomcat jdbc connection pool
+		<dependency>
+			<groupId>org.apache.tomcat</groupId>
+			<artifactId>tomcat-jdbc</artifactId>
+			<version>${org.apache.tomcat.jdbc.version}</version>
+		</dependency>
+        -->
+	
+		<!-- MySQL connector
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>${mysql.connector.java.version}</version>
+			<scope>runtime</scope>
+		</dependency>
+		-->
+		
+		<dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>${org.aspectj.aspectjweaver.version}</version>
+        </dependency>
+        
+        <!-- Apache commons lib -->
+		<dependency>
+			<groupId>commons-collections</groupId>
+			<artifactId>commons-collections</artifactId>
+			<version>${org.apache.commons.collections.version}</version>
+		</dependency>
+
+		<!-- Logger libs -->
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>${org.apache.log4j.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>${org.slf4j.log4j12.version}</version>
+		</dependency>
+
+		<!-- Jackson databind -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>${com.fasterxml.jackson.core.jackson.databind.version}</version>
+		</dependency>
+		
+		<dependency>
+    		<groupId>org.hibernate</groupId>
+    		<artifactId>hibernate-validator</artifactId>
+    		<version>${org.hibernate.validator.version}</version>
+		</dependency>
+
+        <!-- Hibernate entity manager
+		<dependency>
+		    <groupId>org.hibernate</groupId>
+		    <artifactId>hibernate-entitymanager</artifactId>
+		    <version>${org.hibernate.entitymanager.version}</version>
+		</dependency>
+		-->
+		
+		<dependency>
+		    <groupId>org.glassfish.web</groupId>
+		    <artifactId>javax.el</artifactId>
+		    <version>${org.glassfish.web.javax.el.version}</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>javax.servlet</groupId>
+		    <artifactId>javax.servlet-api</artifactId>
+		    <version>${javax.servlet.api.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.docworks</groupId>
+			<artifactId>docworks-dctm</artifactId>
+			<version>${com.docworks.dctm.version}</version>
+		</dependency>
+		
+		<!-- For test only -->
+		<dependency>
+		    <groupId>org.testng</groupId>
+		    <artifactId>testng</artifactId>
+		    <version>${org.testng.version}</version>
+		    <scope>test</scope>
+		</dependency>
+
+        <!-- H2 database
+		<dependency>
+		    <groupId>com.h2database</groupId>
+		    <artifactId>h2</artifactId>
+		    <version>${com.h2database.h2.version}</version>
+		    <scope>test</scope>
+		</dependency>
+		-->
+	</dependencies>
+
+	<build>
+		<finalName>webtop</finalName>
+		<plugins>
+			<!-- Maven编译插件 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${org.apache.maven.compiler.plugin.version}</version>
+				<configuration>
+					<compilerVersion>${project.build.jdk.version}</compilerVersion>
+					<source>${project.build.jdk.version}</source>
+					<target>${project.build.jdk.version}</target>
+					<encoding>${project.build.sourceEncoding}</encoding>
+					<showWarnings>true</showWarnings>
+				</configuration>
+			</plugin>
+
+            <!-- Maven Jetty插件 -->
+            <plugin>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-maven-plugin</artifactId>
+                <version>${org.eclipse.jetty.maven.plugin.version}</version>
+                <configuration>
+                    <httpConnector>
+                        <port>8080</port>
+                    </httpConnector>
+                    <stopKey>shutdown</stopKey>
+                    <stopPort>9966</stopPort>
+                    <scanIntervalSeconds>2</scanIntervalSeconds>
+                    <reload>automatic</reload>
+
+                    <requestLog implementation="org.eclipse.jetty.server.NCSARequestLog">
+                        <filename>target/jetty-access-yyyy_mm_dd.log</filename>
+                        <filenameDateFormat>yyyy_MM_dd</filenameDateFormat>
+                        <logDateFormat>yyyy-MM-dd HH:mm:ss</logDateFormat>
+                        <logTimeZone>GMT+8:00</logTimeZone>
+                        <append>true</append>
+                        <logServer>true</logServer>
+                        <retainDays>7</retainDays>
+                        <logCookies>true</logCookies>
+                    </requestLog>
+
+                    <webApp>
+                        <contextPath>/${project.artifactId}</contextPath>
+                        <resourceBases>
+                            <resourceBase>${project.basedir}/src/main/webapp</resourceBase>
+                        </resourceBases>
+                    </webApp>
+
+                </configuration>
+            </plugin>
+		</plugins>
+	</build>
+	
+	<!-- Aliyun repository -->
+	<repositories>
+		<repository>
+			<id>central</id>
+			<name>aliyun</name>
+			<url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+		</repository>
+	</repositories>
+</project>		 
