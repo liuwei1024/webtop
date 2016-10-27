@@ -25,7 +25,7 @@ public class DfSessionReleaseAspect {
     /**
      * Aspect切点，切入到Service层的所有方法。
      */
-    @Pointcut("execution(* org.matrixstudio.webtop.service.*.*(..))")
+    @Pointcut("execution(* com.docworks.webtop.service.*.*(..))")
     public void pointCut() {}
 
     /**
